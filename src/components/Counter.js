@@ -1,13 +1,8 @@
 import React from 'react'
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { increaseCount, decreaseCount, resetCount } from '../actions/index';
 
 class Counter extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return(
             <div>
@@ -27,11 +22,12 @@ function mapStateToProps(state){
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({
-        handleIncrement: increaseCount,
-        handleDecrease: decreaseCount,
-        handleReset: resetCount
-    }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+//Below mapDispatchToProps is a function dispatcher. The recommended way is to use Object. Where we map the Action creator to the dispatcher.
+// function mapDispatchToProps(dispatch){
+//     return bindActionCreators({
+//         handleIncrement: increaseCount,
+//         handleDecrease: decreaseCount,
+//         handleReset: resetCount
+//     }, dispatch)
+// }
+export default connect(mapStateToProps, { handleIncrement: increaseCount, handleDecrease: decreaseCount, handleReset: resetCount})(Counter);
